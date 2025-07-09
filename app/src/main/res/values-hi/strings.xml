@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">रेस्टोरेंट ऐप</string>
+
+    <!-- Home Screen -->
+    <string name="cuisine">व्यंजन</string>
+    <string name="top_dishes">शीर्ष व्यंजन</string>
+    <string name="add">जोड़ें +</string>
+    <string name="quantity">मात्रा: %1$d</string>
+    <string name="cart">कार्ट</string>
+    <string name="language">भाषा</string>
+    <string name="added_to_cart">कार्ट में जोड़ा गया</string>
+
+    <!-- Cuisine Screen -->
+    <string name="select_dish">व्यंजन चुनें</string>
+
+    <!-- Cart Screen -->
+    <string name="your_cart">आपकी गाड़ी</string>
+    <string name="net_total">कुल राशि:</string>
+    <string name="cgst">CGST (2.5%):</string>
+    <string name="sgst">SGST (2.5%):</string>
+    <string name="grand_total">कुल योग:</string>
+    <string name="place_order">ऑर्डर करें</string>
+    <string name="order_successful">ऑर्डर सफलतापूर्वक किया गया</string>
+    <string name="order_failed">ऑर्डर असफल</string>
+    <string name="order_ref">लेन-देन संदर्भ: %1$s</string>
+
+    <!-- Toasts / Errors -->
+    <string name="failed_to_load">डेटा लोड करने में विफल</string>
+    <string name="invalid_cuisine">अमान्य व्यंजन</string>
+</resources>

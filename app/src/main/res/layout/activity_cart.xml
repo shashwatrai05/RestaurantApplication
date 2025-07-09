@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView android:text="@string/your_cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/layout_cart_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="8dp" />
+
+        <TextView
+            android:id="@+id/tv_total_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/net_total" />
+
+        <TextView
+            android:id="@+id/tv_cgst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cgst" />
+
+        <TextView
+            android:id="@+id/tv_sgst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sgst" />
+
+        <TextView
+            android:id="@+id/tv_grand_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/grand_total" />
+
+        <Button
+            android:id="@+id/btn_place_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/place_order"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

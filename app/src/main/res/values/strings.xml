@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Restaurant App</string>
+
+    <!-- Home Screen -->
+    <string name="cuisine">Cuisine</string>
+    <string name="top_dishes">Top Dishes</string>
+    <string name="add">Add +</string>
+    <string name="quantity">Qty: %1$d</string>
+    <string name="cart">Cart</string>
+    <string name="language">Language</string>
+    <string name="added_to_cart">Added to cart</string>
+
+    <!-- Cuisine Screen -->
+    <string name="select_dish">Select Dishes</string>
+
+    <!-- Cart Screen -->
+    <string name="your_cart">Your Cart</string>
+    <string name="net_total">Net Total:</string>
+    <string name="cgst">CGST (2.5%):</string>
+    <string name="sgst">SGST (2.5%):</string>
+    <string name="grand_total">Grand Total:</string>
+    <string name="place_order">Place Order</string>
+    <string name="order_successful">Order placed successfully</string>
+    <string name="order_failed">Order failed</string>
+    <string name="order_ref">Transaction Ref: %1$s</string>
+
+    <!-- Toasts / Errors -->
+    <string name="failed_to_load">Failed to load data</string>
+    <string name="invalid_cuisine">Invalid cuisine</string>
+</resources>
