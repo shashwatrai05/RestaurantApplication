@@ -1,17 +1,20 @@
+//CartActivity.kt
 package com.example.restaurantapplication.screens.cart
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantapplication.R
-import com.example.restaurantapplication.screens.cart.CartManager
+import com.example.restaurantapplication.data.models.CartItem
 import org.json.JSONArray
 import org.json.JSONObject
 
 class CartActivity : AppCompatActivity() {
 
-    private lateinit var cartListLayout: LinearLayout
+    private lateinit var cartRecyclerView: RecyclerView
     private lateinit var totalAmountView: TextView
     private lateinit var cgstView: TextView
     private lateinit var sgstView: TextView
@@ -22,12 +25,14 @@ class CartActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        cartListLayout = findViewById(R.id.layout_cart_items)
+        cartRecyclerView = findViewById(R.id.rv_cart_items)
         totalAmountView = findViewById(R.id.tv_total_amount)
         cgstView = findViewById(R.id.tv_cgst)
         sgstView = findViewById(R.id.tv_sgst)
         grandTotalView = findViewById(R.id.tv_grand_total)
         placeOrderBtn = findViewById(R.id.btn_place_order)
+
+        cartRecyclerView.layoutManager = LinearLayoutManager(this)
 
         populateCart()
 
@@ -38,13 +43,10 @@ class CartActivity : AppCompatActivity() {
 
     private fun populateCart() {
         val cartItems = CartManager.getCartItems()
-        var total = 0
-        cartListLayout.removeAllViews()
+        cartRecyclerView.adapter = CartAdapter(cartItems)
 
+        var total = 0
         for (item in cartItems) {
-            val row = TextView(this)
-            row.text = "${item.item_name} x${item.item_quantity} = ₹${item.item_price * item.item_quantity}"
-            cartListLayout.addView(row)
             total += item.item_price * item.item_quantity
         }
 

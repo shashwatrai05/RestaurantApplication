@@ -12,7 +12,7 @@
 
         <!-- Title -->
         <TextView
-            android:text="@string/your_cart"
+            android:text="Your Cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -20,20 +20,20 @@
             android:textColor="@android:color/black"
             android:layout_marginBottom="12dp" />
 
-        <!-- Cart Items -->
-        <LinearLayout
-            android:id="@+id/layout_cart_items"
+        <!-- RecyclerView for cart items -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_cart_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="16dp" />
+            android:layout_marginBottom="16dp"
+            android:nestedScrollingEnabled="false" />
 
         <!-- Price Summary -->
         <TextView
             android:id="@+id/tv_total_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/net_total"
+            android:text="Net Total"
             android:textSize="16sp"
             android:layout_marginBottom="4dp" />
 
@@ -41,7 +41,7 @@
             android:id="@+id/tv_cgst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/cgst"
+            android:text="CGST"
             android:textSize="16sp"
             android:layout_marginBottom="4dp" />
 
@@ -49,7 +49,7 @@
             android:id="@+id/tv_sgst"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/sgst"
+            android:text="SGST"
             android:textSize="16sp"
             android:layout_marginBottom="4dp" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/tv_grand_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/grand_total"
+            android:text="Grand Total"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#4CAF50"
@@ -74,7 +74,7 @@
             android:id="@+id/btn_place_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/place_order"
+            android:text="Place Order"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="@android:color/white"

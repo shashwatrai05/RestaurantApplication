@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="#FAFAFA">
 
+    <ImageView
+        android:id="@+id/cart_item_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_image" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/cart_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dish Name"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/cart_item_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Qty: 1"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/cart_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="₹100"
+            android:textSize="14sp"
+            android:textColor="#4CAF50" />
+    </LinearLayout>
 </LinearLayout>
