@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:background="@color/background_light"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="0dp">
 
-    <LinearLayout
+    <!-- Header Card -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingHorizontal="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="8dp"
-        android:gravity="center_horizontal">
+        android:layout_height="240dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
 
-        <!-- Header Image with Rounded Corners -->
-        <androidx.cardview.widget.CardView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/iv_cuisine_header"
@@ -29,46 +28,90 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/cuisine" />
-        </androidx.cardview.widget.CardView>
 
-        <!-- Cuisine Title -->
-        <TextView
-            android:id="@+id/tv_cuisine_header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cuisine_name"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="4dp"
-            android:gravity="center" />
+            <!-- Gradient Overlay -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/gradient_overlay" />
 
-        <!-- Subtitle or Description -->
-        <TextView
-            android:id="@+id/tv_cuisine_subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/explore_dishes"
-            android:textSize="14sp"
-            android:textColor="#757575"
-            android:layout_marginBottom="16dp"
-            android:gravity="center" />
+            <!-- Header Text -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="24dp">
 
-        <!-- Divider -->
+                <TextView
+                    android:id="@+id/tv_cuisine_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cuisine_name"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="4" />
+
+                <TextView
+                    android:id="@+id/tv_cuisine_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/explore_dishes"
+                    android:textSize="16sp"
+                    android:textColor="#E0FFFFFF"
+                    android:gravity="center"
+                    android:shadowColor="#80000000"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2" />
+            </LinearLayout>
+        </FrameLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Section Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="12dp"
+        android:gravity="center_vertical">
+
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginHorizontal="60dp"
-            android:background="#DDDDDD" />
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_line" />
 
-        <!-- RecyclerView for Dishes -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_dish_list"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:clipToPadding="false"
-            android:paddingBottom="24dp" />
+            android:text="Popular Dishes"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/primary_dark"
+            android:paddingHorizontal="16dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/gradient_line" />
     </LinearLayout>
-</ScrollView>
+
+    <!-- RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_dish_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:overScrollMode="always"
+        android:paddingBottom="16dp"
+        android:scrollbars="vertical" />
+</LinearLayout>
