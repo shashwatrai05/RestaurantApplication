@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,74 +14,123 @@
 
         <!-- Title -->
         <TextView
-            android:text="Your Cart"
+            android:text="@string/your_cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="12dp" />
+            android:textColor="#000000"
+            android:layout_marginBottom="16dp" />
 
-        <!-- RecyclerView for cart items -->
+        <!-- Cart Items RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cart_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:nestedScrollingEnabled="false" />
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:id="@+id/empty_cart_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="40dp"
+            android:paddingBottom="32dp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/iv_empty_cart"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/ic_cart"
+                android:contentDescription="Empty Cart"
+                app:tint="#CCCCCC" />
+
+            <TextView
+                android:id="@+id/tv_empty_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_empty"
+                android:textSize="18sp"
+                android:textColor="#888888"
+                android:layout_marginTop="12dp"
+                android:gravity="center" />
+        </LinearLayout>
+
+
 
         <!-- Price Summary -->
-        <TextView
-            android:id="@+id/tv_total_amount"
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Net Total"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
+            android:elevation="4dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="12dp">
 
-        <TextView
-            android:id="@+id/tv_cgst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="CGST"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-        <TextView
-            android:id="@+id/tv_sgst"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SGST"
-            android:textSize="16sp"
-            android:layout_marginBottom="4dp" />
+                <TextView
+                    android:id="@+id/tv_total_amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\@string/net_total: ₹0"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="8dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#DDDDDD"
-            android:layout_marginVertical="8dp" />
+                <TextView
+                    android:id="@+id/tv_cgst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\@string/cgst: ₹0"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:id="@+id/tv_grand_total"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Grand Total"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="#4CAF50"
-            android:layout_marginBottom="16dp" />
+                <TextView
+                    android:id="@+id/tv_sgst"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\@string/sgst: ₹0"
+                    android:textSize="16sp"
+                    android:textColor="#333333"
+                    android:layout_marginBottom="12dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#DDDDDD"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_grand_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="\@string/grand_total: ₹0"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#4CAF50" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <!-- Place Order Button -->
         <Button
             android:id="@+id/btn_place_order"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Place Order"
+            android:text="@string/place_order"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="@android:color/white"
             android:background="@drawable/rounded_button_bg"
-            android:paddingVertical="10dp"
-            android:layout_marginTop="8dp" />
+            android:paddingVertical="12dp" />
+
     </LinearLayout>
+
 </ScrollView>

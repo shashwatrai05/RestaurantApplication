@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.StrictMode
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,14 +55,15 @@ class MainActivity : AppCompatActivity() {
 
         fetchCuisineData()
 
-        findViewById<Button>(R.id.btn_cart).setOnClickListener {
-            val intent = Intent(this, CartActivity::class.java)
-            startActivity(intent)
-        }
+        findViewById<ImageButton>(R.id.btn_cart).setOnClickListener {
+    val intent = Intent(this, CartActivity::class.java)
+    startActivity(intent)
+}
 
-        findViewById<Button>(R.id.btn_language).setOnClickListener {
-            toggleLanguage()
-        }
+findViewById<ImageButton>(R.id.btn_language).setOnClickListener {
+    toggleLanguage()
+}
+
 
 //        findViewById<Button>(R.id.btn_filter).setOnClickListener {
 //            val intent = Intent(this, FilterActivity::class.java)

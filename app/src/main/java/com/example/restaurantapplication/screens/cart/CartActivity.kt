@@ -1,8 +1,8 @@
-//CartActivity.kt
 package com.example.restaurantapplication.screens.cart
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,16 +21,26 @@ class CartActivity : AppCompatActivity() {
     private lateinit var grandTotalView: TextView
     private lateinit var placeOrderBtn: Button
 
+    // Empty cart layout (Image + Text)
+    private lateinit var emptyCartLayout: LinearLayout
+    private lateinit var emptyCartImage: ImageView
+    private lateinit var emptyCartText: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
+        // Bind views
         cartRecyclerView = findViewById(R.id.rv_cart_items)
         totalAmountView = findViewById(R.id.tv_total_amount)
         cgstView = findViewById(R.id.tv_cgst)
         sgstView = findViewById(R.id.tv_sgst)
         grandTotalView = findViewById(R.id.tv_grand_total)
         placeOrderBtn = findViewById(R.id.btn_place_order)
+
+        emptyCartLayout = findViewById(R.id.empty_cart_layout)
+        emptyCartImage = findViewById(R.id.iv_empty_cart)
+        emptyCartText = findViewById(R.id.tv_empty_cart)
 
         cartRecyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -43,6 +53,28 @@ class CartActivity : AppCompatActivity() {
 
     private fun populateCart() {
         val cartItems = CartManager.getCartItems()
+
+        if (cartItems.isEmpty()) {
+            // Show empty view
+            cartRecyclerView.visibility = View.GONE
+            totalAmountView.visibility = View.GONE
+            cgstView.visibility = View.GONE
+            sgstView.visibility = View.GONE
+            grandTotalView.visibility = View.GONE
+            placeOrderBtn.visibility = View.GONE
+            emptyCartLayout.visibility = View.VISIBLE
+            return
+        }
+
+        // Show cart and hide empty view
+        cartRecyclerView.visibility = View.VISIBLE
+        totalAmountView.visibility = View.VISIBLE
+        cgstView.visibility = View.VISIBLE
+        sgstView.visibility = View.VISIBLE
+        grandTotalView.visibility = View.VISIBLE
+        placeOrderBtn.visibility = View.VISIBLE
+        emptyCartLayout.visibility = View.GONE
+
         cartRecyclerView.adapter = CartAdapter(cartItems)
 
         var total = 0
@@ -54,9 +86,9 @@ class CartActivity : AppCompatActivity() {
         val grandTotal = total + (2 * tax)
 
         totalAmountView.text = "Net Total: ₹$total"
-        cgstView.text = "CGST (2.5%): ₹${String.format("%.2f", tax)}"
-        sgstView.text = "SGST (2.5%): ₹${String.format("%.2f", tax)}"
-        grandTotalView.text = "Grand Total: ₹${String.format("%.2f", grandTotal)}"
+        cgstView.text = "CGST (2.5%): ₹${"%.2f".format(tax)}"
+        sgstView.text = "SGST (2.5%): ₹${"%.2f".format(tax)}"
+        grandTotalView.text = "Grand Total: ₹${"%.2f".format(grandTotal)}"
     }
 
     private fun makePayment() {
@@ -89,7 +121,7 @@ class CartActivity : AppCompatActivity() {
             put("data", dataArray)
         }
 
-        Log.d("PAYMENT_REQUEST_BODY", body.toString(2)) // Pretty print
+        Log.d("PAYMENT_REQUEST_BODY", body.toString(2))
 
         val response = ApiClient.postRequest(
             endpoint = "/emulator/interview/make_payment",

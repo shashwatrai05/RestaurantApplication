@@ -1,105 +1,124 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@color/white">
 
-    <LinearLayout
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:minHeight="56dp"
+        android:background="@color/white"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:elevation="4dp">
 
-        <!-- Segment 1: Cuisine Title -->
-        <TextView
-            android:id="@+id/tv_cuisine_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cuisine"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginBottom="12dp" />
-
-        <!-- Horizontal Cuisine Cards -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_cuisine"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:clipToPadding="false"
-            android:paddingEnd="40dp"
-            android:overScrollMode="never"
-            android:layout_marginBottom="20dp" />
+            android:layout_height="wrap_content">
 
-        <!-- Segment 2: Top Dishes Title + Filter Button -->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_centerVertical="true" />
+
+            <LinearLayout
+                android:id="@+id/toolbar_actions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignParentEnd="true"
+                android:gravity="center_vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_language"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/circle_icon_bg"
+                    android:contentDescription="@string/language"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_language"
+                    app:tint="@android:color/white"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <ImageButton
+                    android:id="@+id/btn_cart"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/circle_icon_bg"
+                    android:contentDescription="@string/cart"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_cart"
+                    app:tint="@android:color/white"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:padding="16dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="12dp"
-            android:gravity="center_vertical">
+            android:orientation="vertical">
 
+            <!-- Cuisine Title -->
+            <TextView
+                android:id="@+id/tv_cuisine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cuisine"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Cuisine RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cuisine"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Top Dishes Title -->
             <TextView
                 android:id="@+id/tv_top_dishes"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/top_dishes"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black" />
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="12dp" />
 
-            <!--
-            <Button
-                android:id="@+id/btn_filter"
-                android:layout_width="wrap_content"
+            <!-- Top Dishes RecyclerView -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_top_dishes"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Filter"
-                android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="@android:color/holo_blue_light"
-                android:paddingHorizontal="12dp"
-                android:background="@drawable/rounded_button_bg" />
-            -->
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:layout_marginBottom="32dp" />
         </LinearLayout>
-
-        <!-- Top 3 Dishes -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_top_dishes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:clipToPadding="false"
-            android:layout_marginBottom="28dp" />
-
-        <!-- Segment 3: Cart & Language Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginBottom="24dp">
-
-            <Button
-                android:id="@+id/btn_cart"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/cart"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/rounded_button_bg" />
-
-            <Space android:layout_width="16dp" android:layout_height="wrap_content" />
-
-            <Button
-                android:id="@+id/btn_language"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="@string/language"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:background="@drawable/rounded_button_bg" />
-        </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

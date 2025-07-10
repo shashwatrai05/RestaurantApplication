@@ -1,32 +1,41 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="280dp"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_marginEnd="12dp"
-    android:layout_marginBottom="8dp"
-    android:background="@drawable/rounded_card"
-    android:elevation="4dp"
-    android:padding="12dp">
+    android:layout_marginBottom="12dp"
+    card_view:cardCornerRadius="16dp"
+    card_view:cardElevation="6dp"
+    card_view:cardUseCompatPadding="true"
+    card_view:cardBackgroundColor="@android:color/white">
 
-    <ImageView
-        android:id="@+id/cuisine_image"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:scaleType="centerCrop"
-        android:contentDescription="@string/cuisine"
-        android:background="@drawable/rounded_card"
-        android:clipToOutline="true" />
-
-    <TextView
-        android:id="@+id/cuisine_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cuisine Name"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:textColor="@android:color/black" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</LinearLayout>
+        <!-- Larger Image Height -->
+        <ImageView
+            android:id="@+id/cuisine_image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+        android:scaleType="centerCrop"
+        android:clipToOutline="true"
+        android:contentDescription="@string/cuisine"
+        android:background="@drawable/rounded_image_mask" />
+
+        <!-- Cuisine Name -->
+        <TextView
+            android:id="@+id/cuisine_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cuisine_name"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

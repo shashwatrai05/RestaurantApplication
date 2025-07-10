@@ -19,8 +19,6 @@ class TopDishAdapter(
     private val cuisineMap: Map<String, String> // <itemId, cuisineId>
 ) : RecyclerView.Adapter<TopDishAdapter.DishViewHolder>() {
 
-
-    // Track quantity
     private val dishQuantities = mutableMapOf<String, Int>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DishViewHolder {
@@ -34,7 +32,7 @@ class TopDishAdapter(
         holder.price.text = "₹${dish.price}"
         holder.rating.text = "⭐ ${dish.rating}"
 
-        // Load image
+        // Load image from URL
         thread {
             try {
                 val input = URL(dish.image_url).openStream()
@@ -47,19 +45,31 @@ class TopDishAdapter(
             }
         }
 
-        // Handle quantity
+        // Set quantity text
         val currentQty = dishQuantities[dish.id] ?: 0
-        holder.quantity.text = "Qty: $currentQty"
+        holder.quantity.text = currentQty.toString()
 
+        // Add Button Logic
         holder.addBtn.setOnClickListener {
             val cuisineId = cuisineMap[dish.id] ?: ""
             CartManager.addToCart(dish, cuisineId)
-// ✅ Correct
 
-            val updated = (dishQuantities[dish.id] ?: 0) + 1
-            dishQuantities[dish.id] = updated
-            holder.quantity.text = "Qty: $updated"
+            val updatedQty = (dishQuantities[dish.id] ?: 0) + 1
+            dishQuantities[dish.id] = updatedQty
+            holder.quantity.text = updatedQty.toString()
             Toast.makeText(context, "${dish.name} added", Toast.LENGTH_SHORT).show()
+        }
+
+        // Subtract Button Logic
+        holder.subBtn.setOnClickListener {
+            val currentQty = dishQuantities[dish.id] ?: 0
+            if (currentQty > 0) {
+                val updatedQty = currentQty - 1
+                dishQuantities[dish.id] = updatedQty
+                holder.quantity.text = updatedQty.toString()
+                CartManager.removeFromCart(dish.id)
+                Toast.makeText(context, "${dish.name} removed", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -72,5 +82,6 @@ class TopDishAdapter(
         val rating: TextView = itemView.findViewById(R.id.dish_rating)
         val quantity: TextView = itemView.findViewById(R.id.dish_quantity)
         val addBtn: Button = itemView.findViewById(R.id.btn_add)
+        val subBtn: Button = itemView.findViewById(R.id.btn_subtract)
     }
 }

@@ -12,6 +12,7 @@
     <color name="accent">#03DAC5</color>
     <color name="primary">#6200EE</color>
 
-
+<color name="toolbar_background">#F7F7F7</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

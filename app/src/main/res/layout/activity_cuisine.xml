@@ -1,62 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
     android:background="@android:color/white"
-    android:gravity="center_horizontal">
+    android:fillViewport="true">
 
-    <!-- Header Section -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:maxWidth="600dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginTop="8dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="8dp"
+        android:gravity="center_horizontal">
 
-        <!-- Cuisine Image -->
-        <ImageView
-            android:id="@+id/iv_cuisine_header"
+        <!-- Header Image with Rounded Corners -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:background="@drawable/rounded_image"
-            android:clipToOutline="true"
-            android:layout_marginBottom="12dp" />
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <ImageView
+                android:id="@+id/iv_cuisine_header"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/cuisine" />
+        </androidx.cardview.widget.CardView>
 
         <!-- Cuisine Title -->
         <TextView
             android:id="@+id/tv_cuisine_header"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cuisine Name"
-            android:textSize="22sp"
+            android:text="@string/cuisine_name"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"
-            android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="4dp"
+            android:gravity="center" />
+
+        <!-- Subtitle or Description -->
+        <TextView
+            android:id="@+id/tv_cuisine_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/explore_dishes"
+            android:textSize="14sp"
+            android:textColor="#757575"
+            android:layout_marginBottom="16dp"
+            android:gravity="center" />
 
         <!-- Divider -->
         <View
-            android:layout_width="80dp"
-            android:layout_height="2dp"
-            android:background="#CCCCCC"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp" />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginHorizontal="60dp"
+            android:background="#DDDDDD" />
 
-    <!-- RecyclerView -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_dish_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:paddingBottom="8dp"
-        android:overScrollMode="never"
-        android:layout_gravity="center_horizontal" />
-</LinearLayout>
+        <!-- RecyclerView for Dishes -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_dish_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:clipToPadding="false"
+            android:paddingBottom="24dp" />
+    </LinearLayout>
+</ScrollView>
