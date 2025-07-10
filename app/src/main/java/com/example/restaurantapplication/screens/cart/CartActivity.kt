@@ -1,11 +1,11 @@
 package com.example.restaurantapplication.screens.cart
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.restaurantapplication.R
-import com.example.restaurantapplication.data.models.CartItem
-import com.example.restaurantapplication.data.network.ApiClient
+import com.example.restaurantapplication.screens.cart.CartManager
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -17,12 +17,6 @@ class CartActivity : AppCompatActivity() {
     private lateinit var sgstView: TextView
     private lateinit var grandTotalView: TextView
     private lateinit var placeOrderBtn: Button
-
-    // Mock cart data
-    private val cartItems = listOf(
-        CartItem("234552", "34234234", "Butter Chicken", 199, 2),
-        CartItem("234552", "34234236", "Aloo Gobhi", 120, 1)
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +30,16 @@ class CartActivity : AppCompatActivity() {
         placeOrderBtn = findViewById(R.id.btn_place_order)
 
         populateCart()
+
         placeOrderBtn.setOnClickListener {
             makePayment()
         }
     }
 
     private fun populateCart() {
+        val cartItems = CartManager.getCartItems()
         var total = 0
+        cartListLayout.removeAllViews()
 
         for (item in cartItems) {
             val row = TextView(this)
@@ -61,37 +58,51 @@ class CartActivity : AppCompatActivity() {
     }
 
     private fun makePayment() {
+        val cartItems = CartManager.getCartItems()
+
+        if (cartItems.isEmpty()) {
+            Toast.makeText(this, "Cart is empty!", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         val dataArray = JSONArray()
         var totalAmount = 0
         var totalItems = 0
 
         for (item in cartItems) {
-            val obj = JSONObject()
-            obj.put("cuisine_id", item.cuisine_id)
-            obj.put("item_id", item.item_id)
-            obj.put("item_price", item.item_price)
-            obj.put("item_quantity", item.item_quantity)
+            val obj = JSONObject().apply {
+                put("cuisine_id", item.cuisine_id)
+                put("item_id", item.item_id)
+                put("item_price", item.item_price)
+                put("item_quantity", item.item_quantity)
+            }
+            dataArray.put(obj)
             totalAmount += item.item_price * item.item_quantity
             totalItems += item.item_quantity
-            dataArray.put(obj)
         }
 
-        val body = JSONObject()
-        body.put("total_amount", totalAmount.toString())
-        body.put("total_items", totalItems)
-        body.put("data", dataArray)
+        val body = JSONObject().apply {
+            put("total_amount", totalAmount.toString())
+            put("total_items", totalItems)
+            put("data", dataArray)
+        }
+
+        Log.d("PAYMENT_REQUEST_BODY", body.toString(2)) // Pretty print
 
         val response = ApiClient.postRequest(
             endpoint = "/emulator/interview/make_payment",
             jsonBody = body.toString(),
-            proxyAction = "make_payment"
+            proxyAction = "make_payment",
         )
 
         if (response != null) {
+            Log.d("PAYMENT_RESPONSE", response)
             val json = JSONObject(response)
             val message = json.optString("response_message", "Success")
             val txn = json.optString("txn_ref_no", "-")
             Toast.makeText(this, "$message\nRef: $txn", Toast.LENGTH_LONG).show()
+            CartManager.clearCart()
+            populateCart()
         } else {
             Toast.makeText(this, "Payment failed", Toast.LENGTH_SHORT).show()
         }

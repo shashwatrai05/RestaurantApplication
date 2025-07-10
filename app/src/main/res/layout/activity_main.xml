@@ -1,74 +1,105 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:padding="16dp"
+    android:background="@android:color/white">
 
     <LinearLayout
-        android:id="@+id/main_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="vertical">
 
-        <!-- Cuisine Carousel -->
+        <!-- Segment 1: Cuisine Title -->
         <TextView
-            android:id="@+id/tv_cuisines"
+            android:id="@+id/tv_cuisine_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Explore Cuisines"
-            android:textSize="18sp"
+            android:text="@string/cuisine"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:paddingBottom="8dp"/>
+            android:textColor="@android:color/black"
+            android:layout_marginBottom="12dp" />
 
+        <!-- Horizontal Cuisine Cards -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cuisine"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:orientation="horizontal"
+            android:layout_height="180dp"
             android:clipToPadding="false"
-            android:paddingBottom="8dp"/>
+            android:paddingEnd="40dp"
+            android:overScrollMode="never"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Segment 2: Top Dishes Title + Filter Button -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_top_dishes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/top_dishes"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+
+            <!--
+            <Button
+                android:id="@+id/btn_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Filter"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:backgroundTint="@android:color/holo_blue_light"
+                android:paddingHorizontal="12dp"
+                android:background="@drawable/rounded_button_bg" />
+            -->
+        </LinearLayout>
 
         <!-- Top 3 Dishes -->
-        <TextView
-            android:id="@+id/tv_top_dishes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/top_dishes"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:paddingTop="16dp"
-            android:paddingBottom="8dp" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_top_dishes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:clipToPadding="false" />
+            android:overScrollMode="never"
+            android:clipToPadding="false"
+            android:layout_marginBottom="28dp" />
 
-        <!-- Cart and Language -->
+        <!-- Segment 3: Cart & Language Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:paddingTop="16dp">
+            android:layout_marginBottom="24dp">
 
             <Button
                 android:id="@+id/btn_cart"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Go to Cart" />
+                android:layout_height="wrap_content"
+                android:text="@string/cart"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button_bg" />
+
+            <Space android:layout_width="16dp" android:layout_height="wrap_content" />
 
             <Button
                 android:id="@+id/btn_language"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="हिन्दी / English" />
+                android:layout_height="wrap_content"
+                android:text="@string/language"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:background="@drawable/rounded_button_bg" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

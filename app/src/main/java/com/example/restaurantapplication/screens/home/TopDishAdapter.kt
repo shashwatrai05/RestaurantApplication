@@ -9,13 +9,16 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.restaurantapplication.R
 import com.example.restaurantapplication.data.models.Item
+import com.example.restaurantapplication.screens.cart.CartManager
 import java.net.URL
 import kotlin.concurrent.thread
 
 class TopDishAdapter(
     private val context: Context,
-    private val dishList: List<Item>
+    private val dishList: List<Item>,
+    private val cuisineMap: Map<String, String> // <itemId, cuisineId>
 ) : RecyclerView.Adapter<TopDishAdapter.DishViewHolder>() {
+
 
     // Track quantity
     private val dishQuantities = mutableMapOf<String, Int>()
@@ -49,6 +52,10 @@ class TopDishAdapter(
         holder.quantity.text = "Qty: $currentQty"
 
         holder.addBtn.setOnClickListener {
+            val cuisineId = cuisineMap[dish.id] ?: ""
+            CartManager.addToCart(dish, cuisineId)
+// ✅ Correct
+
             val updated = (dishQuantities[dish.id] ?: 0) + 1
             dishQuantities[dish.id] = updated
             holder.quantity.text = "Qty: $updated"

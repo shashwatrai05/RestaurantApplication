@@ -13,6 +13,7 @@
         android:theme="@style/Theme.RestaurantApplication"
         tools:targetApi="31">
         <activity android:name=".screens.cart.CartActivity" />
+        <activity android:name=".screens.cuisine.CuisineActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
